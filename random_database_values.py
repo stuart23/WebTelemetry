@@ -11,7 +11,7 @@ def __main__(*args, **kwargs):
     timeseries_collection = client.meteor.timeseries
 
     starttime = datetime.now()
-    test_series = [{'time': start_time + timedelta(0,0,1000*n), 'value': 100.*random()} for n in range(1000)]
+    test_series = [{'time': starttime + timedelta(0,0,1000*n), 'value': 100.*random()} for n in range(1000)]
     timeseries_collection.insert({'name': 'silverstone',
                                   'data': {'velocity': test_series}
                                 })
