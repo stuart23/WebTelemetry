@@ -4,17 +4,24 @@
 
 <body>
   <h1>Tests</h1>
-    <form class="test-dropdown">
-      <select>
-        <option value disabled selected>--Select Test--</option>
-        {{#each tests}}
-        <option>{{> test}}</option>
-        {{/each}}
-      </select>
-    </form>
+  <form class="test-dropdown">
+    <select>
+      <option value disabled selected>--Select Test--</option>
+      {{#each tests}}
+      <option>{{> test}}</option>
+      {{/each}}
+    </select>
+  </form>
+
+  {{#each datatable}}
+  {{> data}}
+  {{/each}}
 
 </body>
 
 <template name="test">
   <p>{{name}}</p>
+</template>
+<template name="data">
+    <p>{{name}}</p>
 </template>
