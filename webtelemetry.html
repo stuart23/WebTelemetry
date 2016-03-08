@@ -3,12 +3,18 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Tests</h1>
+    <form class="test-dropdown">
+      <select>
+        <option value disabled selected>--Select Test--</option>
+        {{#each tests}}
+        <option>{{> test}}</option>
+        {{/each}}
+      </select>
+    </form>
 
-  {{> hello}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="test">
+  <p>{{name}}</p>
 </template>

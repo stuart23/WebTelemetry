@@ -1,23 +1,18 @@
+Tests = new Mongo.collection("timeseries");
+
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+    Template.body.helpers({
+        tests: function () {
+            return Tests.find();
+        }
+//        test_data: function() {
+//            return Tests.find({"name": Session.get("selected_test")});
+//        }
+    });
+//
+//    Template.body.events({
+//        "change .test-dropdown": function(event) {
+//            Session.set("selected_test", event.target.value);
+//        }
+//    });
 }
