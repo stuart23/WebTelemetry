@@ -5,13 +5,20 @@
 <body>
   <h1>Tests</h1>
   <form class="test-dropdown">
+    Test:
     <select>
       <option value disabled selected>--Select Test--</option>
       {{> test_item_list}}
     </select>
   </form>
+  <form class="frequency-selector">
+    Frequency (Hz):
+    <input type="number" name="frequency" min="1" max="1000" value="10">
+  </form>
 
-<p>DATA:{{> test_data}}</p>
+  <p>DATA:
+    {{> test_data}}
+  </p>
 
 </body>
 
