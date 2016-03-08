@@ -7,21 +7,23 @@
   <form class="test-dropdown">
     <select>
       <option value disabled selected>--Select Test--</option>
-      {{#each tests}}
-      <option>{{> test}}</option>
-      {{/each}}
+      {{> test_items}}
     </select>
   </form>
 
-  {{#each datatable}}
-  {{> data}}
-  {{/each}}
+<p>{{> test_data}}</p>
 
 </body>
 
-<template name="test">
-  <p>{{name}}</p>
+<template name="test_items">
+      {{#each test_names}}
+      <option>{{name}}</option>
+      {{/each}}
 </template>
-<template name="data">
-    <p>{{name}}</p>
+
+<template name="test_data">
+      {{name}}
 </template>
+
+
+
