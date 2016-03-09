@@ -2,7 +2,6 @@ Events = new Mongo.Collection("events");
 Timeseries = new Mongo.Collection("timeseries");
 
 function timeMaxMin(event_datasets) {
-
   var mins = [];
   var maxs = [];
   event_datasets.forEach(function (variable) {
@@ -23,8 +22,14 @@ function resample(event_id, frequency) {
     {event : new Meteor.Collection.ObjectID(event_id)}
   );
   var time_max_min = timeMaxMin(event_datasets);
+  // Times in milliseconds
+  var j = Session.get('selected_frequency');
+  var k = j + 5;
+  var l = j * 2;
+  time_delta = time_max_min.time_max-time_max_min.time_min;
 
-  return {test_value: [time_max_min.time_min, time_max_min.time_max]};
+  return {test_value: [frequency, time_max_min.time_max-time_max_min.time_min,
+    time_max_min.time_min, time_max_min.time_max]};
 }
 
 if (Meteor.isClient) {
@@ -40,6 +45,7 @@ if (Meteor.isClient) {
 
     Template.test_data.helpers({
         'test_values': function () {
+          // if {Session.get('selected_test') == null}
           return resample(
                                   Session.get('selected_test'),
                                   Session.get('selected_frequency')
@@ -51,6 +57,7 @@ if (Meteor.isClient) {
         'change.test-dropdown': function (event) {
             Session.set('selected_test', event.target.value);
         },
+
         'change.frequency-selector': function (event) {
             Session.set('selected_frequency', event.target.value);
         }
