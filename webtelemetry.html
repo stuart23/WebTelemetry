@@ -29,7 +29,9 @@
 </template>
 
 <template name="test_data">
-      {{#with test_values}}
+  <table>
+      {{#each test_values}}
         {{test_value}}
       {{/with}}
+  </table>
 </template>
