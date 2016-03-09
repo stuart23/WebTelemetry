@@ -1,26 +1,36 @@
-Tests = new Mongo.Collection("timeseries");
+Events = new Mongo.Collection("events");
+Timeseries = new Mongo.Collection("timeseries");
 
-function resample(test, frequency) {
-  var timeseries = Tests.findOne({name : test}).timeseries;
+function resample(event_id, frequency) {
+  var event_datasets = Timeseries.find(
+    {event : new Meteor.Collection.ObjectID(event_id)}
+  );
   var count = 0;
   var mins = [];
-  timeseries.forEach(function (variable) {
-    var me = variable;
-    var local_minaaaa = variable.find();
-    var local_min = variable.data.find({}, {sort: {time: -1}});
-    mins.push({key: count, value: mins});
+  event_datasets.forEach(function (variable) {
+    var me = variable.data;
+
+    var you = variable;
+  //   mins.push({key: count, value: mins});
     }
   );
-  return mins;
+    return {test_value: event_id};
 }
 
 if (Meteor.isClient) {
     Template.test_item_list.helpers({
-        'test_names': function () { return Tests.find(); }
+        'test_names': function () {
+          return Events.find().map(
+            function (element) {
+              return {name: element.name, id: element._id.valueOf()};
+            }
+          );
+        }
     });
 
     Template.test_data.helpers({
-        'test_values': function () { return resample(
+        'test_values': function () {
+          return resample(
                                   Session.get('selected_test'),
                                   Session.get('selected_frequency')
                                   );
@@ -31,7 +41,7 @@ if (Meteor.isClient) {
         'change.test-dropdown': function (event) {
             Session.set('selected_test', event.target.value);
         },
-        'change.frequuency-selector': function (event) {
+        'change.frequency-selector': function (event) {
             Session.set('selected_frequency', event.target.value);
         }
     });
