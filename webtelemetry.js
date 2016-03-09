@@ -1,20 +1,30 @@
 Events = new Mongo.Collection("events");
 Timeseries = new Mongo.Collection("timeseries");
 
+function timeMaxMin(event_datasets) {
+
+  var mins = [];
+  var maxs = [];
+  event_datasets.forEach(function (variable) {
+    var timesteps = variable.data.map(
+        function (timestep) {
+          return timestep.time;
+          }
+        );
+    mins.push(_.min(timesteps));
+    maxs.push(_.max(timesteps));
+    }
+  );
+  return {time_min : _.min(mins), time_max : _.max(maxs)};
+}
+
 function resample(event_id, frequency) {
   var event_datasets = Timeseries.find(
     {event : new Meteor.Collection.ObjectID(event_id)}
   );
-  var count = 0;
-  var mins = [];
-  event_datasets.forEach(function (variable) {
-    var me = variable.data;
+  var time_max_min = timeMaxMin(event_datasets);
 
-    var you = variable;
-  //   mins.push({key: count, value: mins});
-    }
-  );
-    return {test_value: event_id};
+  return {test_value: [time_max_min.time_min, time_max_min.time_max]};
 }
 
 if (Meteor.isClient) {
