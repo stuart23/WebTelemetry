@@ -21,11 +21,6 @@ def __main__(*args, **kwargs):
                         {'name': 'lat-g', 'units': 'N', 'data': random_series(10., 500.), 'event': id}
                         ]:
             timeseries_collection.insert(dataset)
-        #                           'timeseries': [
-        #                                          {'name': 'velocity', 'units': 'm/s', 'data': random_series(100., 50.)},
-        #                                          {'name': 'rpm', 'units': '1/min', 'data': random_series(5000., 200.)},
-        #                                         ]
-        #                         })
 
 if __name__ == '__main__':
     __main__()
