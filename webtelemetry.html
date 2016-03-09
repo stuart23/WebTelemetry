@@ -24,14 +24,12 @@
 
 <template name="test_item_list">
       {{#each test_names}}
-      <option>{{name}}</option>
+      <option value={{id}}>{{name}}</option>
       {{/each}}
 </template>
 
 <template name="test_data">
       {{#with test_values}}
-        {{name}}
+        {{test_value}}
       {{/with}}
 </template>
-
-
