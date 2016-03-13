@@ -1,20 +1,23 @@
 Meteor.methods({
-  'resample': function(event_id, frequency) {
-    console.log('event id' + event_id);
-    var event_datasets = Timeseries.find(
-      {event : new Meteor.Collection.ObjectID(event_id)}
-    );
-    // var frequency_num = Number(frequency);
-    // return {test_value: frequency_num}
-    // if (event_datasets.count() == 0 || isNaN(frequency_num)) {
-    //   return {test_value: ['']};
+  'resample': function(args) {
+    var event_id_object = new Meteor.Collection.ObjectID(args.event_id);
+    //console.log(event_id_object);
+    // var event_id_object = null;
+    // try {
+    //   console.log('event id ' + event_id);
+    //   var stu = 23;
+    // } catch(err) {
     // }
-    var b = 23;
-    // var time_max_min = Meteor.call('timeMaxMin', event_datasets);
-    // Times in milliseconds
+    var event_datasets = Timeseries.find(
+      {event : event_id_object}
+    );
+    // var b = event_datasets.fetch();
+    // console.log(b);
+    // // var time_max_min = Meteor.call('timeMaxMin', event_datasets);
+    // // Times in milliseconds
     var time_max_min = {time_min : 0.5, time_max : 2.3}
     time_delta = time_max_min.time_max-time_max_min.time_min;
-    return {test_value: [frequency, time_max_min.time_max-time_max_min.time_min,
+    return {test_value: [args.frequency, time_max_min.time_max-time_max_min.time_min,
       time_max_min.time_min, time_max_min.time_max]};
   },
 

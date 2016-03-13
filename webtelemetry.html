@@ -3,12 +3,18 @@
 </head>
 
 <body>
+  {{> test_data}}
+</body>
+
+<template name="test_data">
   <h1>Tests</h1>
   <form class="test-dropdown">
     Test:
     <select>
       <option value disabled selected>--Select Test--</option>
-      {{> test_item_list}}
+      {{#each test_names}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
     </select>
   </form>
   <form class="frequency-selector">
@@ -17,21 +23,11 @@
   </form>
 
   <p>DATA:
-    {{> test_data}}
+    <table>
+      {{#with test_values}}
+        <tr>{{test_value}}</tr>
+      {{/with}}
+    </table>
   </p>
 
-</body>
-
-<template name="test_item_list">
-      {{#each test_names}}
-      <option value={{id}}>{{name}}</option>
-      {{/each}}
-</template>
-
-<template name="test_data">
-  <table>
-      {{#with test_values}}
-        {{test_value}}
-      {{/with}}
-  </table>
 </template>
